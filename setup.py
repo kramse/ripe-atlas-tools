@@ -39,6 +39,7 @@ setup(
         "tzlocal",
         "pyyaml",
         "pyOpenSSL>=0.13",
+        "sparklines",
     ],
     tests_require=[
         "nose",
