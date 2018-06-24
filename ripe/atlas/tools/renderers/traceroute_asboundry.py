@@ -53,6 +53,10 @@ class Renderer(BaseRenderer):
 
     def __init__(self, *args, **kwargs):
         BaseRenderer.__init__(self, *args, **kwargs)
+        self.f = open('myfile', 'w')
+        self.f.write ('digraph G {\nfontsize=7\nfontcolor="#777777"\nlabeljust=r\nbgcolor="white"\nlabel="ripe-atlas"\n\n')
+        self.nodes = set()
+        self.edges = set()
 
     def _get_min_hop(self, packets):
         m = -1
@@ -80,8 +84,8 @@ class Renderer(BaseRenderer):
             next_asn = ''
         except AttributeError:
             next_asn = ''
-            
-        last_min = self._get_min_hop(last.packets) 
+
+        last_min = self._get_min_hop(last.packets)
         curr_min = self._get_min_hop(curr.packets)
         try:
             next_min = self._get_min_hop(next_.packets)
@@ -150,7 +154,7 @@ class Renderer(BaseRenderer):
             asn = ""
             rtts = []
             for packet in hop.packets:
-                name = name or packet.origin or "*"    
+                name = name or packet.origin or "*"
                 if packet.origin and not asn:
                     asn = IP(packet.origin).asn
                 if packet.rtt:
@@ -186,11 +190,23 @@ class Renderer(BaseRenderer):
                 ),
                 colour
             )
-            
+            if name != '*' and name not in self.nodes:
+                self.f.write ('node{} [shape=rectangle color="black" fontsize=8 label="{}\\nAS{}" style=filled fillcolor="#ffffff" ]\n'.format(name.replace('.','_'),name,asn))
+                self.nodes.add(name)
+
+            if i != 0 and name+namebefore not in self.edges and name !='*' and namebefore != '*':
+                self.f.write ('node{} -> node{} [color="#888887"] [penwidth=1]\n'.format(name.replace('.','_'),namebefore.replace('.','_')))
+                self.edges.add(name+namebefore)
+            namebefore = name
 
         created = result.created.astimezone(get_localzone())
+
         return "\n{}\n{}\n\n{}".format(
             colourise("Probe #{}".format(result.probe_id), "bold"),
             colourise(created.strftime(self.TIME_FORMAT), "bold"),
             r
         )
+    def additional(self, results):
+        self.f.write( '\n}\n')
+        self.f.close()
+        return
