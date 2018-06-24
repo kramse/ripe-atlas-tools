@@ -11,14 +11,11 @@ except IOError:
     cfg = {'traceroute': {'response-timeout': 50, 'packets': 1, 'probes': 2}}
 
 args = ["traceroute", "--traceroute-show-asns", "--resolve-on-probe"]
-print(cfg)
 for arg in cfg["traceroute"]:
-    print(arg)
     args.append("--" + str(arg))
     args.append(str(cfg["traceroute"][arg]))
 args.append("--target")
 args.append(str(sys.argv[1]))
-print(args)
 
 cmd = trace()
 cmd.init_args(args)

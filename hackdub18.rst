@@ -44,6 +44,19 @@ to minimise the amount of thinking you need to do to maximise the result of meas
    - steal good parts from https://github.com/emileaben/eyeballtrace ? / use/extend bleau? https://labs.ripe.net/Members/stephane_bortzmeyer/creating-ripe-atlas-one-off-measurements-with-blaeu
 
 
+atlas-trace
+==============
+The idea is to strip down the commandline args needed to run a measurement. But still have them configurable via a conf file in the .config/ripe-atlas-tools directory.
+
+Commandline args needed before:
+.. image:: docs/images/old-cmd.png
+
+Commandline args after:
+.. image:: docs/images/ripe-atlas-trace.png
+
+Example config:
+.. image:: docs/images/example-config.png
+
 Already existing stuff
 ======================
 - https://labs.ripe.net/Members/annika_wickert/using-ripe-atlas-to-monitor-game-service-connectivity
