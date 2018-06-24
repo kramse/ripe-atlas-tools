@@ -1,5 +1,7 @@
 import yaml
 import os
+import sys
+
 from ripe.atlas.tools.commands.measure import TracerouteMeasureCommand as trace
 
 try:
@@ -8,7 +10,16 @@ try:
 except OSError:
     cfg = {}
 
-print cfg
+args = ["traceroute"]
+print(cfg)
+for arg in cfg["traceroute"]:
+    print(arg)
+    args.append("--" + str(arg))
+    args.append(str(cfg["traceroute"][arg]))
+args.append("--target")
+args.append(str(sys.argv[1]))
+print(args)
+
 cmd = trace()
-cmd.init_args(["traceroute","--target", "8.8.8.8"])
+cmd.init_args(args)
 cmd.run()
