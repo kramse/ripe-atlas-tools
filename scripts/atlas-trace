@@ -7,10 +7,10 @@ from ripe.atlas.tools.commands.measure import TracerouteMeasureCommand as trace
 try:
     with open(os.path.expanduser("~") + "/.config/ripe-atlas-tools/config.yml", "r") as ymlfile:
         cfg = yaml.load(ymlfile)
-except OSError:
-    cfg = {}
+except IOError:
+    cfg = {'traceroute': {'response-timeout': 50, 'packets': 1, 'probes': 2}}
 
-args = ["traceroute"]
+args = ["traceroute", "--traceroute-show-asns", "--resolve-on-probe"]
 print(cfg)
 for arg in cfg["traceroute"]:
     print(arg)
