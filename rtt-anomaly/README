@@ -12,3 +12,14 @@ The spark job creates a file with lines like this:
 ./create-sqlite.py creates a local sqlite database
 with a single table 'rtts'
 in this table there are prb_id|ip|pct95|pct99 values 
+
+
+rudimentary influxdb importer is available
+
+this should allow querying influx instead of the local sqliteDB
+for percentiles
+
+something like this as an influxdb commandline:
+> select PERCENTILE("value",95), "ip","prb_id" from "rtts" group by "ip","prb_id";
+
+
