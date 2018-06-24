@@ -57,6 +57,7 @@ setup(
         "scripts/asslcert",
         "scripts/ahttp",
         "scripts/antp",
+        "scripts/atlas-trace",
         "scripts/ripe-atlas",
     ],
     keywords=['RIPE', 'RIPE NCC', 'RIPE Atlas', 'Command Line'],

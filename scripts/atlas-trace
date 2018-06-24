@@ -1,0 +1,14 @@
+import yaml
+import os
+from ripe.atlas.tools.commands.measure import TracerouteMeasureCommand as trace
+
+try:
+    with open(os.path.expanduser("~") + "/.config/ripe-atlas-tools/config.yml", "r") as ymlfile:
+        cfg = yaml.load(ymlfile)
+except OSError:
+    cfg = {}
+
+print cfg
+cmd = trace()
+cmd.init_args(["traceroute","--target", "8.8.8.8"])
+cmd.run()
