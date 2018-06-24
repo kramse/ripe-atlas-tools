@@ -1,0 +1,14 @@
+code to generate a sqlite database
+from a spark job on all ripe atlas traceroute
+data for a single day
+
+The spark job code is in ./spark/
+(for reference)
+
+The spark job creates a file with lines like this:
+  prb_id, IP           , count, min_rtt, pct95_rtt, pct99_rtt
+[[14881,"4.69.203.173"],[82,14.633,128.64395,136.73303]]
+
+./create-sqlite.py creates a local sqlite database
+with a single table 'rtts'
+in this table there are prb_id|ip|pct95|pct99 values 
