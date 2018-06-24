@@ -49,12 +49,15 @@ atlas-trace
 The idea is to strip down the commandline args needed to run a measurement. But still have them configurable via a conf file in the .config/ripe-atlas-tools directory.
 
 Commandline args needed before:
+
 .. image:: docs/images/old-cmd.png
 
 Commandline args after:
+
 .. image:: docs/images/ripe-atlas-trace.png
 
 Example config:
+
 .. image:: docs/images/example-config.png
 
 Already existing stuff
